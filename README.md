@@ -22,6 +22,8 @@ pnpm install
 pnpm sorted
 ```
 
+<!-- Dates are sorted in dd/mm/yyyy format -->
+
 <!--
 | Command          | Description          |
 | ---------------- | -------------------- |

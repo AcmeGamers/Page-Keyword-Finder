@@ -3,6 +3,7 @@
 // Table of Content
 // ----------------
 // @Imports
+// @Variables
 // @Scrape function
 // -- @Remove all script + style tags
 // -- @Removes injected styles + scripts from cleaned html
@@ -17,11 +18,22 @@ const cheerio = require("cheerio");
 const fs = require("fs");
 const urls = require("../../data/json/url-scrapper.json");
 
+// @Variables
+const date = new Date();
+const { month, day, year } = {
+  month: date.getMonth() + 1,
+  day: date.getDate(),
+  year: date.getFullYear(),
+};
+
 // @Scrape function
 async function scrape() {
   // Makes the cache directory if it doesn't already exist
   if (!fs.existsSync(".cache")) {
     fs.mkdirSync(".cache");
+  }
+  if (!fs.existsSync(".cache/url-scrapper")) {
+    fs.mkdirSync(".cache/url-scrapper");
   }
 
   // Loops through the urls and scrapes them
@@ -74,7 +86,10 @@ async function scrape() {
 
     // Save the cleaned HTML to a file
     // @Output
-    fs.writeFileSync(`.cache/${fileName}.html`, cleanedHtml);
+    fs.writeFileSync(
+      `.cache/url-scrapper/${day}-${month}-${year}-${fileName}.html`,
+      cleanedHtml
+    );
   }
 }
 
