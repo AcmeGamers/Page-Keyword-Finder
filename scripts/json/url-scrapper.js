@@ -81,6 +81,11 @@ async function scrape() {
     cleanedHtml = cleanedHtml.replace(/data-element_type="[^"]*"/g, "");
     cleanedHtml = cleanedHtml.replace(/data-widget_type="[^"]*"/g, "");
 
+    // @Add page url and title to the top of the file for reference
+    cleanedHtml = `<!-- URL: ${url} -- Page Title: ${$(
+      "title"
+    ).text()} -->\n${cleanedHtml}`;
+
     // changes url name to file name + removes https prefix
     const fileName = url.replace("https://", "").replace(/\//g, "-");
 
