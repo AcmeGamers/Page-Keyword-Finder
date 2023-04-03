@@ -3,7 +3,15 @@
   "version": "1.0.0",
   "description": "a keyword finder for each page",
   "main": "app.js",
-  "scripts": {},
+  "scripts": {
+    "ujson": "node ./scripts/json/url-scrapper.js",
+    "kjson": "node ./scripts/json/keyword-finder.js",
+    "bjson": "node ./scripts/json/both.js",
+    "00000": "node -e 'console.log(000000)'",
+    "uexcel": "node ./scripts/excel/url-scrapper.js",
+    "kexcel": "node ./scripts/excel/keyword-finder.js",
+    "bexcel": "node ./scripts/excel/both.js"
+  },
   "repository": {
     "type": "git",
     "url": "git+https://github.com/AcmeGamers/Page-Keyword-Finder.git"
