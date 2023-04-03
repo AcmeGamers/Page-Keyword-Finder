@@ -4,13 +4,15 @@
   "description": "a keyword finder for each page",
   "main": "app.js",
   "scripts": {
+    "bjson": "node ./scripts/json/both.js",
     "ujson": "node ./scripts/json/url-scrapper.js",
     "kjson": "node ./scripts/json/keyword-finder.js",
-    "bjson": "node ./scripts/json/both.js",
+    "ajson": "node ./scripts/json/auto.js",
     "00000": "node -e 'console.log(000000)'",
+    "bexcel": "node ./scripts/excel/both.js",
     "uexcel": "node ./scripts/excel/url-scrapper.js",
     "kexcel": "node ./scripts/excel/keyword-finder.js",
-    "bexcel": "node ./scripts/excel/both.js"
+    "aexcel": "node ./scripts/excel/auto.js"
   },
   "repository": {
     "type": "git",
