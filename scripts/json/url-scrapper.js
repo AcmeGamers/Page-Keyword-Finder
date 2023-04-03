@@ -11,6 +11,7 @@
 // -- @Removes all sizes, nitro-lazy-srcset, nitro-lazy-src, nitro-lazy-empty, height and width from img elements
 // -- @Removes all data-settings, data-element_type, data-widget_type from divs
 // -- @Output
+// ----------------
 
 // @Imports
 const axios = require("axios");
