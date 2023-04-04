@@ -11,14 +11,11 @@
 const fs = require("fs");
 const files = fs.readdirSync(".cache/url-scrapper");
 const keywords = require("../../data/json/find-keywords.json");
+const JSON2Excel = require("./json-to-excel");
 
 // @Variables
-const date = new Date();
-const { month, day, year } = {
-  month: date.getMonth() + 1,
-  day: date.getDate(),
-  year: date.getFullYear(),
-};
+let density;
+let data = [];
 
 // @Directory Checker
 if (!fs.existsSync(".cache")) {
@@ -42,9 +39,9 @@ for (let i = 0; i < files.length; i++) {
     const keyword = keywords[j];
     const regex = new RegExp(keyword, "gi");
     const matches = fileContents.match(regex);
-    const density = (matches.length / fileContents.length) * 100;
 
     if (matches) {
+      density = (matches.length / fileContents.length) * 100;
       console.log(`Found ${matches.length} matches for ${keyword} in ${file}`);
 
       // Density
@@ -57,13 +54,45 @@ for (let i = 0; i < files.length; i++) {
     }
   }
 
-  // Rename to JSON
-  const newFileName = file.replace(".html", ".json");
+  // TODO: Updating with mutliple value flag
+  if (false) {
+    // Rename to JSON
+    const newFileName = file.replace(".html", ".json");
 
-  // @Write to file
-  fs.writeFileSync(
-    `.cache/keyword-finder/${newFileName}`,
-    JSON.stringify(keywordsInfo, null, 2),
-    "utf8"
-  );
+    // @Write to file
+    fs.writeFileSync(
+      `.cache/keyword-finder/${newFileName}`,
+      JSON.stringify(keywordsInfo, null, 2),
+      "utf8"
+    );
+  }
+
+  let domain = file.replace(".html", "");
+
+  // Save entire result to data
+  data.push([
+    ...keywordsInfo.map((keywordInfo) => {
+      return {
+        file: keywordInfo.file
+          .replace(".html", "")
+          // replaces everything before the domain variable
+          .replace(new RegExp(`.*${domain}`), domain),
+
+        keyword: keywordInfo.keyword,
+        matches: keywordInfo.matches,
+        density: keywordInfo.density,
+      };
+    }),
+  ]);
 }
+
+// @Write to file
+fs.writeFileSync(
+  ".cache/keyword-finder/keyword-finder.json",
+  JSON.stringify(data, null, 2),
+  "utf8"
+);
+
+console.log(data[0][0].file);
+
+JSON2Excel(data, data[0][0].file.replace("https://", "").replace(".html", ""));
