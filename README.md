@@ -4,7 +4,7 @@ A site scrapper that takes a list of array and downloads the entire files in the
 
 The actual output you get on console is a table that shows the keywords used in every html file with their related keyword pairs.
 
-This app is dedicated to ![ITAdOn](https://itadon.com)
+This app is dedicated to [ITAdOn](https://itadon.com)
 
 ## Usage
 
