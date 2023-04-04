@@ -15,6 +15,7 @@ const JSON2Excel = require("./json-to-excel");
 
 // @Variables
 let density;
+let id = true;
 let data = [];
 
 // @Directory Checker
@@ -67,8 +68,20 @@ for (let i = 0; i < files.length; i++) {
     );
   }
 
-  let domain = file.replace(".html", "");
+  let domain = file
+    .replace(".html", "")
+    // removes everything before current year
+    .replace(
+      new RegExp(`.*${new Date().getFullYear()}`),
+      new Date().getFullYear()
+    )
+    // removes everything before the first -
+    .replace(new RegExp(`.*-`), "");
 
+  if (id) {
+    console.log(domain);
+    id = false;
+  }
   // Save entire result to data
   data.push([
     ...keywordsInfo.map((keywordInfo) => {
